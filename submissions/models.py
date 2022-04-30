@@ -7,7 +7,8 @@ CATEGORIES = [
     ('hi', "History"),
     ('ph', "Philosophy"),
     ('po', "Politics"),
-    ('pm', "Poetry")
+    ('pm', "Poetry"),
+    ('ms', "Misc")
 ]
 
 
