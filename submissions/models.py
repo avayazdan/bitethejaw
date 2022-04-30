@@ -16,7 +16,7 @@ class Submissions(models.Model):
     """
     User submissons
     """
-    image = models.CharField(max_length=50, default=None)
+    image = models.CharField(max_length=200, default=None)
     submitted_by = models.CharField(max_length=50, default=None)
     date_submitted = models.DateField(default=None)
     text_field = models.CharField(max_length=2000, default=None)
