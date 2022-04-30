@@ -1,5 +1,14 @@
 
+from sre_parse import CATEGORIES
 from django.db import models
+
+CATEGORIES = [
+    ('at', "Art"),
+    ('hi', "History"),
+    ('ph', "Philosophy"),
+    ('po', "Politics"),
+    ('pm', "Poetry")
+]
 
 
 class Submissions(models.Model):
@@ -10,7 +19,11 @@ class Submissions(models.Model):
     submitted_by = models.CharField(max_length=50, default=None)
     date_submitted = models.DateField(default=None)
     text_field = models.CharField(max_length=2000, default=None)
-    category = models.CharField(max_length=50, default=None)
+    category = models.TextField(
+        choices=CATEGORIES,
+        default=None,
+    )
+
 
 def __str__(self):
     """Formats entries in the Admin panel"""
