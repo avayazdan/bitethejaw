@@ -1,6 +1,4 @@
-# from unicodedata import category
-# from ast import keyword
-from unicodedata import category
+
 from django.db import models
 
 
