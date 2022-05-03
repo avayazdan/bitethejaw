@@ -18,6 +18,10 @@ class UserSerializer(serializers.ModelSerializer):
             User_data = data.pop("user")
 
             User = User(**data)
+            User.set_password(data['password'])
+            User.save()
+            
+            
 
             if User_data:
                 User, _created = User.objects.get_or_create(
@@ -29,17 +33,17 @@ class UserSerializer(serializers.ModelSerializer):
 
             return Submissions
 
-    def update(self, submissions, data):
-        User_data = data.pop("User")
-        Submissions.image = data.get("image", Submissions.image)
+    # def update(self, Submissions, data):
+    #     User_data = data.pop("User")
+    #     Submissions.image = data.get("image", Submissions.image)
 
-        if User_data:
-            User, _created = User.objects.get_or_create(
-                **User_data)
-            User.author = User
+    #     if User_data:
+    #         User, _created = User.objects.get_or_create(
+    #             **User_data)
+    #         User.author = User
             
-        # save to the database
-        User.save()
+    #     # save to the database
+    #     User.save()
 
-        # render to the api
-        return Submissions
+    #     # render to the api
+    #     return Submissions

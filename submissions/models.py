@@ -1,6 +1,7 @@
-
+# import uuid
 from sre_parse import CATEGORIES
 from django.db import models
+from users.models import User
 
 CATEGORIES = [
     ('at', "Art"),
@@ -16,9 +17,13 @@ class Submissions(models.Model):
     """
     User submissons
     """
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    # submission_id = models.PositiveIntegerField(primary_key=True)
+    # uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     image = models.CharField(max_length=200, default=None)
-    submitted_by = models.CharField(max_length=50, default=None)
-    date_submitted = models.DateField(default=None)
+    submitted_by = models.ForeignKey(User, related_name="submitted_by", on_delete=models.PROTECT)
+    date_submitted = models.DateField(auto_now_add=True)
     text_field = models.CharField(max_length=2000, default=None)
     category = models.TextField(
         choices=CATEGORIES,

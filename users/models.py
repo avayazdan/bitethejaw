@@ -9,7 +9,8 @@ class User(models.Model):
     email = models.CharField(max_length=50, default=None)
     password = models.CharField(max_length=50, default=None)
 
+
     def __str__(self):
         """ represents the class objects as a string """
-        return f"{self.name} - {self.branch}"
+        return f"{self.username}"
       
