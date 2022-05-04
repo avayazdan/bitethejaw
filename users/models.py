@@ -7,6 +7,8 @@ class User(models.Model):
     submissions = models.CharField(max_length=50)
     date_joined = models.DateField
     email = models.CharField(max_length=50, default=None)
+    bio = models.CharField(max_length=300, default="Add your bio here")
+    display_picture = models.CharField(max_length=200, default="Add a display picture here")
     password = models.CharField(max_length=50, default=None)
 
 
