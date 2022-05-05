@@ -22,7 +22,8 @@ class Submissions(models.Model):
     # submission_id = models.PositiveIntegerField(primary_key=True)
     # uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     image = models.CharField(max_length=200, default=None)
-    submitted_by = models.ForeignKey(User, related_name="submitted_by", on_delete=models.PROTECT)
+    submitted_by = models.ForeignKey(
+        User, related_name="submitted_by", on_delete=models.PROTECT)
     date_submitted = models.DateField(auto_now_add=True)
     text_field = models.CharField(max_length=2000, default=None)
     category = models.TextField(
@@ -30,7 +31,10 @@ class Submissions(models.Model):
         default=None,
     )
 
+    # def utcoffset(self, dt):
+    #     return self.__offet
 
-def __str__(self):
-    """Formats entries in the Admin panel"""
-    return f"{self.text_field} - {self.image}"
+
+    def __str__(self):
+        """Formats entries in the Admin panel"""
+        return f"{self.text_field} - {self.image}"
