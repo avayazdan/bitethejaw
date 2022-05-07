@@ -10,7 +10,6 @@ class SubmissionSerializer(serializers.ModelSerializer):
         model = Submissions
         fields = '__all__'
         
-        
 
 
 User = get_user_model()
@@ -21,6 +20,8 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username')
 
+User = serializers.SlugRelatedField(
+  slug_field="username", read_only=True)
 
 class PopulatedSubmissionSerializer(SubmissionSerializer):
     submitted_by = UserSerializer()

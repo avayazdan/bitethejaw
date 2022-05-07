@@ -6,7 +6,17 @@ from rest_framework import generics
 # from rest_framework import status
 # from rest_framework import Response
 from .models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, RegisterSerializer
+from rest_framework.permissions import AllowAny
+
+
+class RegisterView(generics.CreateAPIView):
+    """
+    CreateAPIView ensures only a create operation is possible
+    """
+    permission_classes = [AllowAny]
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
 
 
 # class UsersListView(APIView):
