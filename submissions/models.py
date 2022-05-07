@@ -24,7 +24,7 @@ class Submissions(models.Model):
     # uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     image = models.CharField(max_length=200, default=None)
     submitted_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL, blank=True, on_delete=models.CASCADE)
     # submitted_by = models.ForeignKey(
     #     User, related_name="submitted_by", on_delete=models.PROTECT)
     date_submitted = models.DateField(auto_now_add=True)

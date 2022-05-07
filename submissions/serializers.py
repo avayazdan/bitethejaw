@@ -9,22 +9,28 @@ class SubmissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Submissions
         fields = '__all__'
-        
-
-
-User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ('id', 'username')
 
-User = serializers.SlugRelatedField(
-  slug_field="username", read_only=True)
 
 class PopulatedSubmissionSerializer(SubmissionSerializer):
     submitted_by = UserSerializer()
+
+    def create(self, data):
+        user = self.context['request'].user
+        # {"title": "asda", "data": ""}
+        print("request", self.context['request'])
+        submission = Submissions(**data, submitted_by=user)
+        return submission
+
+    # def create(self, data):
+    #     print(data.user)
+    #     submission = Submissions(**data)
+    #     return submission
 
 
 # class UserSerializer(serializers.ModelSerializer):
