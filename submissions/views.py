@@ -6,28 +6,41 @@ from users.models import User
 # from django.views.generic.edit import UpdateView
 
 
-class SubmissionsListView(generics.ListAPIView):
+class SubmissionsListView(generics.ListCreateAPIView):
     queryset = Submissions.objects.all()
-    serializer_class = PopulatedSubmissionSerializer
+    serializer_class = SubmissionSerializer
 
-
-class SubmissionsCreateView(generics.CreateAPIView):
-    queryset = Submissions.objects.all()
-    serializer_class = PopulatedSubmissionSerializer
-    permission_classes = (IsAuthenticated,)
-
-    def create(self, request, *args, **kwargs):
-        data = request.data.copy()
-        data["submitted_by"] = User.objects.get(username=request.user)
-        serializer = self.serializer_class(
-            data=data, context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+    def perform_create(self, serializer):
+        serializer.save(submitted_by=self.request.user)
 
 
 class SubmissionsDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Submissions.objects.all()
-    serializer_class = PopulatedSubmissionSerializer
+    serializer_class = SubmissionSerializer
+
+
+# class SubmissionsListView(generics.ListAPIView):
+#     queryset = Submissions.objects.all()
+#     serializer_class = PopulatedSubmissionSerializer
+
+
+# class SubmissionsCreateView(generics.CreateAPIView):
+#     queryset = Submissions.objects.all()
+#     serializer_class = PopulatedSubmissionSerializer
+#     permission_classes = (IsAuthenticated,)
+
+#     def create(self, request, *args, **kwargs):
+#         data = request.data.copy()
+#         data["submitted_by"] = User.objects.get(username=request.user)
+#         serializer = self.serializer_class(
+#             data=data, context={'request': request})
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+
+
+# class SubmissionsDetailView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Submissions.objects.all()
+#     serializer_class = PopulatedSubmissionSerializer
 
 
 # class SubmissionsUpdateView(UpdateView):
