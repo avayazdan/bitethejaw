@@ -79,7 +79,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", "username", "submissions", "date_joined", "email", "bio", "display_picture")
+        fields = ("id", "username", "date_joined", "email", "bio", "display_picture")
         
         #choose only the fields that you want to contain in your model
 

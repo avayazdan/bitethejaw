@@ -1,20 +1,22 @@
 from rest_framework import serializers
+
+# from users.serializers import User
 # from users.serializers import UserSerializer
 from .models import Submissions
-# from users.models import User
-from django.contrib.auth import get_user_model
-
-
-class SubmissionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Submissions
-        fields = '__all__'
-
+from users.models import User
+# from django.contrib.auth import get_user_model
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = get_user_model()
+        model = User
         fields = ('id', 'username')
+
+class SubmissionSerializer(serializers.ModelSerializer):
+    submitted_by = UserSerializer
+
+    class Meta:
+        model = Submissions
+        fields = '__all__'
 
 
 class PopulatedSubmissionSerializer(SubmissionSerializer):
