@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-s31&(e1t0%g4*qt70j56j*et0e67r=3@$+5nw#_&y$6@v_p8))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+
+ALLOWED_HOSTS = ["bite-the-jaw.herokuapp.com",
+                "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -38,25 +41,32 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework_simplejwt',
+    'corsheaders',
     'submissions',
     'rest_framework',
     'users'
+    
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # Our react app gets hosted on port `3000`
+    'http://localhost:3000',# Our react app gets hosted on port `3000`
+    'http://127.0.0.1:3000'
+    
 ]
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
+    
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -82,13 +92,19 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'submissions',
+#         'HOST': '127.0.0.1',
+#         'PORT': 5432
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'submissions',
-        'HOST': '127.0.0.1',
-        'PORT': 5432
-    }
+    'default': dj_database_url.config(
+        default='postgres://andru@localhost/90s-baby', conn_max_age=600
+    )
 }
 
 
@@ -129,6 +145,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
