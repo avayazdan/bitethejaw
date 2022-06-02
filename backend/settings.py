@@ -25,10 +25,7 @@ SECRET_KEY = 'django-insecure-s31&(e1t0%g4*qt70j56j*et0e67r=3@$+5nw#_&y$6@v_p8))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
-
-ALLOWED_HOSTS = ["bite-the-jaw.herokuapp.com",
-                "localhost", "127.0.0.1"]
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -64,9 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-]
     
+]
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -92,19 +88,13 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'submissions',
-#         'HOST': '127.0.0.1',
-#         'PORT': 5432
-#     }
-# }
-
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://andru@localhost/90s-baby', conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'submissions',
+        'HOST': '127.0.0.1',
+        'PORT': 5432
+    }
 }
 
 
@@ -146,9 +136,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
